@@ -1,0 +1,82 @@
+Installing Apache Kafka on a Windows machine involves the following steps. Here’s a step-by-step guide:  
+
+Step 1: Prerequisites  
+Install Java:  
+
+Kafka requires Java to run. Download the latest version of Java JDK or OpenJDK.  
+After installation, set the JAVA_HOME environment variable:  
+Go to System Properties -> Advanced -> Environment Variables.  
+Add a new variable JAVA_HOME and set it to your JDK installation path (e.g., C:\Program Files\Java\jdk-XX).  
+Add %JAVA_HOME%\bin to the Path variable.  
+Verify by running:  
+
+bash  
+Copy code  
+java -version  
+Download Kafka:  
+
+Download Kafka from the official Apache Kafka website: https://kafka.apache.org/downloads.  
+Choose the latest binary release and download the .tgz file.  
+Install a Tool to Extract .tgz Files:  
+
+Use tools like 7-Zip to extract the .tgz file.  
+Step 2: Extract Kafka  
+Extract the downloaded .tgz file.  
+
+Example: Extract to C:\kafka.  
+Inside the extracted folder, locate the bin and config directories.  
+
+Step 3: Configure Kafka  
+Open config\server.properties to set the log directory:  
+
+log.dirs=/tmp/kafka-logs  
+Replace /tmp/kafka-logs with a Windows-friendly path, e.g., C:\\kafka\\logs.  
+
+Verify the default ZooKeeper configuration in config\zookeeper.properties. Adjust paths if needed.  
+
+Step 4: Start Kafka  
+Open a command prompt and navigate to the Kafka directory (e.g., cd C:\kafka).  
+
+Start ZooKeeper (Kafka requires ZooKeeper to manage cluster metadata):  
+
+bash  
+Copy code  
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties  
+Open a new command prompt and start Kafka:  
+
+bash  
+Copy code  
+.\bin\windows\kafka-server-start.bat .\config\server.properties  
+Step 5: Verify Installation  
+Create a topic:  
+
+bash  
+Copy code  
+./bin/windows/kafka-topics.bat --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
+./bin/windows/kafka-topics.bat --create --topic all-questions --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
+./bin/windows/kafka-topics.bat --create --topic quiz-creation --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
+./bin/windows/kafka-topics.bat --create --topic quiz-result --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
+List topics:  
+
+bash  
+Copy code  
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092  
+Start a producer:  
+
+bash  
+Copy code  
+.\bin\windows\kafka-console-producer.bat --topic test-topic --bootstrap-server localhost:9092  
+Start a consumer:  
+
+bash  
+Copy code  
+.\bin\windows\kafka-console-consumer.bat --topic test-topic --from-beginning --bootstrap-server localhost:9092  
+Type messages in the producer console, and they should appear in the consumer console.  
+Optional: Add Kafka to Path  
+Add Kafka's bin\windows directory to the system Path variable for easier command execution.  
+
+Verify by running Kafka commands directly without specifying full paths.  
