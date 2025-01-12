@@ -60,6 +60,12 @@ Copy code
 
 ./bin/windows/kafka-topics.bat --create --topic quiz-result --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
 
+./bin/windows/kafka-topics.bat --create --topic all-questions-response --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
+./bin/windows/kafka-topics.bat --create --topic quiz-creation-response --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
+./bin/windows/kafka-topics.bat --create --topic quiz-result-response --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1  
+
 List topics:  
 
 bash  
